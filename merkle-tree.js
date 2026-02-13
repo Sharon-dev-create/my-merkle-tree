@@ -63,9 +63,7 @@ const transactions = [
       if (level.length % 2 !== 0){
         level.push(level[level.length -1]);
     }
-
     level = buildMerkleTree(level);
-    
     }
 
      return level[0];
