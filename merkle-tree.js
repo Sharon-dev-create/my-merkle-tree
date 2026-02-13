@@ -72,31 +72,4 @@ const transactions = [
 
  }
 
- // Verify a transaction is included in the tree by providing a proof,
- //  which is a list of hashes that can be used to reconstruct the path from the transaction to the root.
- function verifyTransaction(transaction, targetIndex) {
-    let level = transaction.map(tx => hash(tx));
-    let proof = [];
-    let index = targetIndex;
-    
-    while (level.length > 1) {
-        // for odd number of transactions
-        if (index % 2 === 0) {
-            proof.push(level[index + 1]);
-        } else if (level.length % 2 !== 0) {
-            proof.push(level[index - 1]);
-        }
-        
-        // Collect sibling hash as proof
-        const isLeft = index % 2 === 0;
-        const nextLevel = [];
-        for (i= 0; i < level.length; i +=2){
-            nextLevel.push(hash(level[i] + level[i + 1]));
-        }
-
-        index = Math.floor(index / 2);
-        level = nextLevel;
-    }
-
-    return proof;
- }
+ 
